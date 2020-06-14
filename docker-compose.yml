@@ -1,0 +1,46 @@
+version: "3.4"
+services: 
+    frontend:
+        # build: ./frontend
+        build:
+            context: ./frontend
+            # dockerfile: Dockerfile_dev
+        depends_on: 
+            - api
+            - jobs
+        volumes: 
+            - ./frontend/app:/app
+        ports: 
+            - 80:8080
+        restart: always
+    api:
+        build: 
+            context: ./api
+            # dockerfile: Dockerfile_dev
+        volumes: 
+            - ./api/app:/app
+        depends_on: 
+            - mongo
+        restart: always
+    jobs:
+        build: 
+            context: ./jobs
+            # dockerfile: Dockerfile_dev
+        depends_on: 
+            - mongo
+        volumes:
+            - ./jobs/app:/app
+        restart: always
+    mongo:
+        image: mongo
+        volumes: 
+            - ./mongodb:/data/db
+        restart: always
+    broker:
+        image: eclipse-mosquitto
+        restart: always
+        # volumes: 
+        #     - ./mosquitto:/mosquitto
+        ports:
+            - 1883:1883
+            
