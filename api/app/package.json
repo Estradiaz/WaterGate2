@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@tsed/mongoose": "^5.54.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "express": "^4.17.1",
     "mongoose": "^5.9.15",
     "ts-express-decorators": "^5.54.3"
